@@ -1,0 +1,53 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: app
+      POSTGRES_DB: globy
+    ports: ["5432:5432"]
+    volumes:
+      - ./.data/db:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    ports: ["6379:6379"]
+
+  api:
+    build: ../globy-api
+    environment:
+      DATABASE_URL: postgres://app:app@db:5432/globy
+      REDIS_URL: redis://redis:6379/0
+      RAILS_ENV: development
+    depends_on: [db, redis]
+    ports: ["3001:3000"]
+    volumes:
+      # アプリコードをライブ反映
+      - ../globy-api:/app
+      # Bundler のインストール先をコンテナ内に保持（ホストに汚さない）
+      - api_bundle:/usr/local/bundle
+      # Rails の tmp/log などを永続化（任意）
+      - api_tmp:/app/tmp
+      - api_log:/app/log
+
+  web:
+    build: ../globy-web
+    environment:
+      API_BASE_URL: http://api:3000
+      NEXT_TELEMETRY_DISABLED: "1"
+    depends_on: [api]
+    ports: ["8000:3000"]
+    volumes:
+      # アプリコードをライブ反映
+      - ../globy-web:/app
+      # node_modules はコンテナ側で保持（ホストの上書きを回避）
+      - web_node_modules:/app/node_modules
+      # .next キャッシュをコンテナ側で保持（ビルド高速化）
+      - web_next:/app/.next
+
+volumes:
+  api_bundle:
+  api_tmp:
+  api_log:
+  web_node_modules:
+  web_next:
