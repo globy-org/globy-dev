@@ -2,3 +2,5 @@
 .env*
 .DS_Store
 .data/\n.env*\n.DS_Store\n
+jar.txt
+*.jar

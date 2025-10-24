@@ -1,16 +1,10 @@
-HTTP/1.1 200 OK
-x-frame-options: SAMEORIGIN
-x-xss-protection: 0
-x-content-type-options: nosniff
-x-permitted-cross-domain-policies: none
-referrer-policy: strict-origin-when-cross-origin
-content-type: application/json; charset=utf-8
-vary: Accept, Origin
-authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI2N2MyNGQ2NS03ZDk2LTQwMDYtYWZhMS1hNDEwMzNhOWEyOTUiLCJzdWIiOiIxOSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTc1OTY1OTU1OCwiZXhwIjoxNzU5NzQ1OTU4fQ.Zw_SA7rhBuJXQ1O9Ms1qR0XDks1a6NY8cog2U98adKE
-etag: W/"514be6d73774400477a3fa8bbefe7732"
-cache-control: max-age=0, private, must-revalidate
-x-request-id: dbc91b40-1d6f-48a1-a0fb-868863a149f0
-x-runtime: 0.222198
-server-timing: start_processing.action_controller;dur=0.01, sql.active_record;dur=0.36, instantiation.active_record;dur=0.05, process_action.action_controller;dur=210.96
-content-length: 289
+HTTP/1.1 502 Bad Gateway
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+content-type: application/json
+server-timing: refresh_error;dur=3
+x-proxy-request-id: 5be7690a-4f0a-4d07-a317-705a190bd2bb
+Date: Mon, 20 Oct 2025 11:50:51 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
 
